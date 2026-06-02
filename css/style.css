@@ -1,15 +1,21 @@
 :root {
-   background-color: #ffffff ;
+   --background-color: #ffffff ;
+   --bg-card: #18181B;
+   --border-card: #27272A;
 }
 @media (prefers-color-scheme: dark) {
 
      :root {
-        background-color: #09090B ;
+        --background-color: #09090B ;
+        --bg-card: #18181B;
+        --border-card: #27272A;
      }
 
 }
 /===================================/
   .quiz-card { 
+       background-color: var(--bg-card);
+       border: 1px solid var(--border-card);
        border-radius: 16px; 
        border: none; 
        box-shadow: 0 4px 20px rgba(0,0,0,0.05); 

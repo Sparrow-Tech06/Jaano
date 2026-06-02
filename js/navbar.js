@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const styles = `
         :root {
             --nav-bg: rgba(255, 255, 255, 0.85);
-            --nav-shadow: 0 4px 6px rgba(31, 38, 135, 0.07);
+            --nav-shadow: 2px 4px 6px rgba(31, 38, 135, 0.07);
             --nav-border: rgba(255, 255, 255, 0.18);
             --text-muted: #666;
             --color-home: #7F56D9; --bg-home: #F4EBFF;

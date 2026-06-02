@@ -2,13 +2,19 @@
    body { 
        background-color: #fff ;
      }
+/===================================/
   .quiz-card { 
        border-radius: 16px; 
        border: none; 
        box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
      }
-        
-        /* Options Style */
+/* Questions Style */
+ .question {
+       border: 1px solid #000 ;
+       padding: 26px ;
+       border-radius: 8px ;
+ }
+   /* Options Style */
    .option-btn { 
         border-radius: 10px; 
         text-align: left; 

@@ -1,7 +1,13 @@
+:root {
+   background-color: #ffffff ;
+}
+@media (prefers-color-scheme: dark) {
 
-   body { 
-       background-color: #fff ;
+     :root {
+        background-color: #09090B ;
      }
+
+}
 /===================================/
   .quiz-card { 
        border-radius: 16px; 

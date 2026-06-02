@@ -46,8 +46,16 @@
     });
 
     function saveLanguage(lang) {
+        // 1. Nayi language save karo
         localStorage.setItem("user_lang", lang);
+        
+        // 2. [IMPROVEMENT] Purani category ko clear karo taaki automatic 'All Categories' select ho jaye
+        localStorage.removeItem("user_category");
+        
+        // UI update karo
         highlightSelected(lang);
+        
+        console.log(`Language changed to: ${lang}. Category reset to All.`);
     }
 
     function highlightSelected(lang) {
@@ -56,5 +64,6 @@
         if(activeCard) activeCard.classList.add('selected');
     }
 </script>
+
 </body>
 </html>

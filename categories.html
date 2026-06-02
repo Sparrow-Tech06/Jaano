@@ -3,56 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Category</title>
+    <title>Categories</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
-        .category-tag { cursor: pointer; transition: all 0.2s; padding: 10px 20px; border-radius: 30px; font-weight: 500; }
-        .category-tag.active { background-color: #0d6efd !important; color: white !important; border-color: #0d6efd !important; }
+        .cat-btn { cursor: pointer; border-radius: 30px; font-weight: 500; padding: 10px 20px; transition: 0.2s; }
+        .active-cat { background-color: #0d6efd !important; color: white !important; }
     </style>
 </head>
 <body>
 
-<div class="container py-4">
-    <h4 class="mb-4 fw-bold">Choose a Category</h4>
-    
-    <div id="category-container" class="d-flex flex-wrap gap-2"></div>
+<nav class="navbar navbar-white bg-white shadow-sm mb-4">
+    <div class="container">
+        <a href="index.html" class="btn btn-sm btn-outline-secondary">← Back to Quiz</a>
+        <span class="navbar-brand mb-0 h1 fw-bold">Categories</span>
+    </div>
+</nav>
 
-    <button class="btn btn-dark w-100 mt-5 py-2.5 rounded-3" onclick="goToHome()">Go to Home</button>
+<div class="container">
+    <h5 class="mb-3 fw-bold">Choose Topic</h5>
+    <div id="category-list" class="d-flex flex-wrap gap-2">
+        <!-- 'All' button standard fallback ke liye -->
+        <button class="btn btn-white border cat-btn" id="cat-all" onclick="selectCategory('all')">All Categories</button>
+    </div>
 </div>
 
 <script>
-    // Aapki available JSON files ki list (bina .json extension ke)
-    const categories = ["gk", "place", "math", "history", "science"];
+    // Aapke system ki saari categories
+    const categories = ["gk", "place", "math"];
 
     document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("category-container");
-        const savedCategory = localStorage.getItem("user_category") || "gk"; // Default gk
+        const listContainer = document.getElementById("category-list");
+        const currentCat = localStorage.getItem("user_category") || "all";
 
         categories.forEach(cat => {
-            const badge = document.createElement("span");
-            badge.className = `badge bg-white text-dark border category-tag fs-6`;
-            badge.innerText = cat.toUpperCase();
-            badge.setAttribute("data-cat", cat);
-            
-            if(cat === savedCategory) {
-                badge.classList.add("active");
-            }
-
-            badge.onclick = function() {
-                document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                localStorage.setItem("user_category", cat);
-            };
-
-            container.appendChild(badge);
+            const btn = document.createElement("button");
+            btn.className = "btn btn-white border cat-btn";
+            btn.id = `cat-${cat}`;
+            btn.innerText = cat.toUpperCase();
+            btn.onclick = () => selectCategory(cat);
+            listContainer.appendChild(btn);
         });
+
+        highlightCategory(currentCat);
     });
 
-    function goToHome() {
-        window.location.href = "index.html";
+    function selectCategory(cat) {
+        if(cat === 'all') {
+            localStorage.removeItem("user_category"); // Clear it for default mixed behavior
+            highlightCategory('all');
+        } else {
+            localStorage.setItem("user_category", cat);
+            highlightCategory(cat);
+        }
+    }
+
+    function highlightCategory(cat) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active-cat'));
+        const activeBtn = document.getElementById(`cat-${cat}`);
+        if(activeBtn) activeBtn.classList.add('active-cat');
     }
 </script>
 </body>
 </html>
-

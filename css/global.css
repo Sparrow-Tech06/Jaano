@@ -73,7 +73,6 @@ header {
   height:38px;
   background: var(--backbtnBg);
   color: var(--backbtnclr);
-  border: 2px solid var(--backbtnbdr) ;
   border-radius:10px;
   display:flex;
   align-items:center;

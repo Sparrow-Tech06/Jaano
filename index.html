@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Content</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-white bg-white shadow-sm mb-4">
+    <div class="container d-flex justify-content-between">
+        <span class="navbar-brand mb-0 h1 fw-bold text-primary">SkyDrop Content</span>
+        <div>
+            <a href="categories.html" class="btn btn-sm btn-outline-secondary me-1">Category</a>
+            <a href="settings.html" class="btn btn-sm btn-outline-secondary">Lang</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="alert alert-info py-2 fs-7 d-flex justify-content-between" id="status-bar">
+        <span>Loading settings...</span>
+    </div>
+
+    <div id="content-container" class="row g-3">
+        <div class="text-center py-5" id="loader">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2 text-muted">Fetching content...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Local storage se values lein (with fallbacks)
+        const lang = localStorage.getItem("user_lang") || "eng";
+        const category = localStorage.getItem("user_category") || "gk";
+
+        // Status update karein
+        document.getElementById("status-bar").innerHTML = `Target: <b>lang/${lang}/${category}.json</b>`;
+
+        // 2. Dynamic path generate karein
+        const jsonPath = `lang/${lang}/${category}.json`;
+
+        // 3. Data fetch karein
+        fetch(jsonPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`File not found: ${jsonPath}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderContent(data);
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+                document.getElementById("content-container").innerHTML = `
+                    <div class="col-12 text-center text-danger py-5">
+                        <h5>Data Not Found!</h5>
+                        <p class="text-muted small">Please make sure the file exists in your server/GitHub repository.</p>
+                    </div>
+                `;
+            })
+            .finally(() => {
+                // Loader ko hide karein
+                document.getElementById("loader").style.display = "none";
+            });
+    });
+
+    // Data ko HTML mein convert karne ka function (Assume aapka JSON ek Array hai)
+    function renderContent(data) {
+        const container = document.getElementById("content-container");
+        container.innerHTML = ""; // Clear loader
+
+        if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML = "<p class='text-center text-muted'>No items available in this category.</p>";
+            return;
+        }
+
+        // Loop chalakar cards render karein
+        data.forEach(item => {
+            const cardHtml = `
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm rounded-3 p-3">
+                        <h6 class="fw-bold mb-1">${item.title || 'No Title'}</h6>
+                        <p class="text-muted small mb-0">${item.description || 'No description available.'}</p>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', cardHtml);
+        });
+    }
+</script>
+</body>
+  </html>
+

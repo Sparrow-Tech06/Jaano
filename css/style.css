@@ -2,6 +2,7 @@
    --background-color: #ffffff ;
    --bg-card: #18181B;
    --border-card: #27272A;
+   --btn-option-bg: #202024;
 }
 @media (prefers-color-scheme: dark) {
 
@@ -9,6 +10,7 @@
         --background-color: #09090B ;
         --bg-card: #18181B;
         --border-card: #27272A;
+        --btn-option-bg: #202024;
      }
 
 }
@@ -29,7 +31,8 @@
        font-weight: 700 ;
  }
    /* Options Style */
-   .option-btn { 
+   .option-btn {
+        background-color: var(--btn-option-bg);
         border-radius: 10px; 
         text-align: left; 
         transition: 0.2s; 

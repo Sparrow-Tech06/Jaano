@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Choose Language</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: sans-serif; }
+        .lang-card { cursor: pointer; transition: all 0.2s ease; border-radius: 12px; }
+        .lang-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .selected { border: 2px solid #0d6efd; background-color: #e7f1ff; }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+    <h4 class="mb-4 fw-bold">Select Content Language</h4>
+    
+    <div class="d-flex flex-column gap-3">
+        <div class="card lang-card p-3 d-flex flex-row justify-content-between align-items-center" onclick="selectLanguage('eng')">
+            <div>
+                <h6 class="mb-0 fw-semibold">English</h6>
+                <small class="text-muted">Default language</small>
+            </div>
+            <input type="radio" name="lang" id="lang-eng" value="eng">
+        </div>
+
+        <div class="card lang-card p-3 d-flex flex-row justify-content-between align-items-center" onclick="selectLanguage('hindi')">
+            <div>
+                <h6 class="mb-0 fw-semibold">हिन्दी (Hindi)</h6>
+                <small class="text-muted">हिंदी में कंटेंट देखें</small>
+            </div>
+            <input type="radio" name="lang" id="lang-hindi" value="hindi">
+        </div>
+
+        <div class="card lang-card p-3 d-flex flex-row justify-content-between align-items-center" onclick="selectLanguage('bang')">
+            <div>
+                <h6 class="mb-0 fw-semibold">বাংলা (Bengali)</h6>
+                <small class="text-muted">বাংলায় বিষয়বস্তু দেখুন</small>
+            </div>
+            <input type="radio" name="lang" id="lang-bang" value="bang">
+        </div>
+    </div>
+
+    <button class="btn btn-primary w-100 mt-4 py-2.5 rounded-3 fw-semibold" onclick="saveSettings()">Save & Continue</button>
+</div>
+
+<script>
+    // Page load par check karo agar pehle se koi lang save hai
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentLang = localStorage.getItem("user_lang") || "eng";
+        selectLanguage(currentLang);
+    });
+
+    function selectLanguage(lang) {
+        // Saare cards se selected class hatao
+        document.querySelectorAll('.lang-card').forEach(card => card.classList.remove('selected'));
+        // Saare radio buttons uncheck karo
+        document.querySelectorAll('input[name="lang"]').forEach(radio => radio.checked = false);
+
+        // Current select wale ko active karo
+        const radio = document.getElementById(`lang-${lang}`);
+        if(radio) {
+            radio.checked = true;
+            radio.closest('.lang-card').classList.add('selected');
+        }
+    }
+
+    function saveSettings() {
+        const selectedLang = document.querySelector('input[name="lang"]:checked').value;
+        localStorage.setItem("user_lang", selectedLang);
+        
+        // Next step: Category selection par bhejo
+        window.location.href = "categories.html";
+    }
+</script>
+</body>
+</html>
+

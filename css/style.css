@@ -1,1 +1,49 @@
 
+   body { 
+       background-color: #fff ;
+     }
+  .quiz-card { 
+       border-radius: 16px; 
+       border: none; 
+       box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+     }
+        
+        /* Options Style */
+   .option-btn { 
+        border-radius: 10px; 
+        text-align: left; 
+        transition: 0.2s; 
+        padding: 14px; 
+        font-weight: 500; 
+        }
+        
+        /* Remove blue border and background on hover/focus */
+        .option-btn:hover, .option-btn:focus, .option-btn:active {
+            background-color: transparent !important;
+            border-color: #dee2e6 !important; /* Default Bootstrap border color */
+            color: #212529 !important;
+            box-shadow: none !important;
+        }
+
+        /* Keep text white and preserve colors for correct/wrong answers */
+        .btn-success.option-btn, .btn-success.option-btn:hover, .btn-success.option-btn:focus {
+            background-color: #198754 !important;
+            border-color: #198754 !important;
+            color: #fff !important;
+        }
+        .btn-danger.option-btn, .btn-danger.option-btn:hover, .btn-danger.option-btn:focus {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+            color: #fff !important;
+        }
+
+        /* Fade-In Animation */
+        .fade-in {
+            animation: fadeIn ease 0.5s;
+            -webkit-animation: fadeIn ease 0.5s;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    

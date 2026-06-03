@@ -1,70 +1,169 @@
-:root {
-   --bg-card: #fcfbf6;
-   --border-card: #27272A;
-   --btn-option-bg: #fff ;
+/* ==========================================================================
+   SkyDrop Quiz - Blue Dark Theme (Overrides for Bootstrap 5)
+   ========================================================================== */
+
+/* Base Styles & Core Canvas */
+body {
+    background-color: #0b0f19 !important; /* Midnight Deep Blue */
+    color: #f1f5f9 !important; /* Crisp Off-White */
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
 }
-@media (prefers-color-scheme: dark) {
 
-     :root {
-        --bg-card: #18181B;
-        --border-card: #27272A;
-        --btn-option-bg: #202024;
-     }
-
+.container {
+    padding-bottom: 90px; /* Space for bottom navigation bar */
 }
-/===================================/
-  .quiz-card { 
-       background-color: var(--bg-card);
-       border: 1px solid var(--border-card);
-       border-radius: 16px; 
-       border: none; margin-top: 70px ;
-       box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
-     }
-/* Questions Style */
- .question {
-       border: 2px solid #000 ;
-       padding: 26px ;  margin-bottom: 30px ;
-       border-radius: 8px ;
-       text-align: center;
-       font-weight: 700 ;
- }
-   /* Options Style */
-   .option-btn {
-        background-color: var(--btn-option-bg);
-        border-radius: 10px; 
-        text-align: left; 
-        transition: 0.2s; 
-        padding: 14px; 
-        font-weight: 500; 
-        }
-        
-        /* Remove blue border and background on hover/focus */
-        .option-btn:hover, .option-btn:focus, .option-btn:active {
-            background-color: transparent !important;
-            border-color: #dee2e6 !important; /* Default Bootstrap border color */
-            color: #212529 !important;
-            box-shadow: none !important;
-        }
 
-        /* Keep text white and preserve colors for correct/wrong answers */
-        .btn-success.option-btn, .btn-success.option-btn:hover, .btn-success.option-btn:focus {
-            background-color: #198754 !important;
-            border-color: #198754 !important;
-            color: #fff !important;
-        }
-        .btn-danger.option-btn, .btn-danger.option-btn:hover, .btn-danger.option-btn:focus {
-            background-color: #dc3545 !important;
-            border-color: #dc3545 !important;
-            color: #fff !important;
-        }
+/* 1. Header & Brand Style */
+.header {
+    background-color: #0b0f19;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
 
-        /* Fade-In Animation */
-        .fade-in {
-            animation: fadeIn ease 0.5s;
-            -webkit-animation: fadeIn ease 0.5s;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-    
+.brand {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: -0.5px;
+}
+
+/* Notification Button Area */
+.back-btn {
+    background: #131a2c !important;
+    border: 1px solid rgba(77, 173, 255, 0.15) !important;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4dadff !important;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.back-btn:hover {
+    background: #3b82f6 !important;
+    color: #0b0f19 !important;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+}
+
+/* 2. Loader custom modifications */
+#loader {
+    color: #94a3b8 !important;
+}
+
+#loader .spinner-border {
+    color: #3b82f6 !important; /* Electric Blue Spinner */
+}
+
+/* 3. Quiz Card Box */
+.quiz-card {
+    background-color: #131a2c !important; /* Premium Dark Navy Card */
+    border: 1px solid rgba(77, 173, 255, 0.08) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    margin-top: 25px;
+}
+
+/* Question Container */
+.question {
+    background-color: #1b253f !important;
+    color: #f1f5f9 !important;
+    border: 2px solid #3b82f6 !important; /* Royal Blue Border */
+    border-radius: 16px !important;
+    padding: 24px 16px !important;
+    text-align: center;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    line-height: 1.5;
+    margin-bottom: 24px !important;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+}
+
+/* 4. Options Interactive Buttons */
+.option-btn {
+    background-color: #1b253f !important;
+    color: #94a3b8 !important; /* Cool Steel Gray Text */
+    border: 1px solid rgba(148, 163, 184, 0.2) !important;
+    border-radius: 14px !important;
+    padding: 16px 20px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Hover state logic */
+.option-btn:hover:not(:disabled) {
+    border-color: #4dadff !important;
+    color: #4dadff !important;
+    background-color: rgba(77, 173, 255, 0.05) !important;
+    transform: translateY(-1px);
+}
+
+/* Disabled state logic (preventing ugly gray out) */
+.option-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 5. JavaScript Dynamic Answer States (Success & Danger overrides) */
+.option-btn.btn-success {
+    background-color: #10b981 !important; /* Emerald Green for correct */
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+    opacity: 1 !important; /* High opacity even when disabled */
+}
+
+.option-btn.btn-danger {
+    background-color: #ef4444 !important; /* Crimson Red for wrong */
+    border-color: #ef4444 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3) !important;
+    opacity: 1 !important;
+}
+
+/* 6. Quiz Completed Result Box Custom Styling */
+#result-box h3 {
+    color: #f1f5f9 !important;
+}
+
+#result-box p {
+    color: #94a3b8 !important;
+}
+
+/* Customizing Bootstrap's .btn-primary for Result Screen */
+.btn-primary {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3) !important;
+    transition: all 0.25s ease !important;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* 7. Core Quiz Animations */
+.fade-in {
+    animation: fadeInSmooth 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInSmooth {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

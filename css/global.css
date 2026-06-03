@@ -116,8 +116,10 @@ button, a {
             padding: 12px 14px; box-sizing: border-box; 
             z-index: 9999; background: transparent;
             pointer-events: none;
+            border-top: 1px solid #EDF2F7;
         }
         .custom-navbar { 
+            border-top: 1px solid #EDF2F7;
             pointer-events: auto; 
             background: var(--nav-bg); 
             backdrop-filter: blur(12px); 

@@ -1,13 +1,11 @@
 :root {
-   --background-color: #ffffff ;
-   --bg-card: #18181B;
+   --bg-card: #fcfbf6;
    --border-card: #27272A;
    --btn-option-bg: #fff ;
 }
 @media (prefers-color-scheme: dark) {
 
      :root {
-        --background-color: #09090B ;
         --bg-card: #18181B;
         --border-card: #27272A;
         --btn-option-bg: #202024;

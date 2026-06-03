@@ -1,11 +1,31 @@
 /* ==========================================================================
-   SkyDrop Quiz - Blue Dark Theme (Overrides for Bootstrap 5)
+   SkyDrop Quiz - Blue Dark Theme (Using CSS :root Variables)
    ========================================================================== */
+
+:root {
+    /* Color Palette */
+    --bg-main: #0b0f19;          /* Midnight Deep Blue */
+    --bg-card: #131a2c;          /* Premium Dark Navy Card */
+    --bg-box: #1b253f;           /* Card internal sections */
+    
+    /* Accent & Brand Colors */
+    --accent-blue: #3b82f6;      /* Royal Electric Blue */
+    --accent-glow: #4dadff;      /* High contrast light blue for hover/borders */
+    
+    /* Feedback States */
+    --state-success: #10b981;    /* Emerald Green for correct answers */
+    --state-danger: #ef4444;     /* Crimson Red for wrong answers */
+    
+    /* Typography Colors */
+    --text-primary: #f1f5f9;     /* Crisp Off-White */
+    --text-secondary: #94a3b8;   /* Cool Steel Gray */
+    --text-dark: #0b0f19;        /* Text color for contrast over highlights */
+}
 
 /* Base Styles & Core Canvas */
 body {
-    background-color: #0b0f19 !important; /* Midnight Deep Blue */
-    color: #f1f5f9 !important; /* Crisp Off-White */
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
     min-height: 100vh;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
@@ -17,20 +37,20 @@ body {
 
 /* 1. Header & Brand Style */
 .header {
-    background-color: #0b0f19;
+    background-color: var(--bg-main);
     border-bottom: 1px solid rgba(59, 130, 246, 0.1);
 }
 
 .brand {
     font-size: 26px;
     font-weight: 700;
-    color: #f1f5f9;
+    color: var(--text-primary);
     letter-spacing: -0.5px;
 }
 
 /* Notification Button Area */
 .back-btn {
-    background: #131a2c !important;
+    background: var(--bg-card) !important;
     border: 1px solid rgba(77, 173, 255, 0.15) !important;
     width: 42px;
     height: 42px;
@@ -38,29 +58,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #4dadff !important;
+    color: var(--accent-glow) !important;
     text-decoration: none;
     transition: all 0.25s ease;
 }
 
 .back-btn:hover {
-    background: #3b82f6 !important;
-    color: #0b0f19 !important;
+    background: var(--accent-blue) !important;
+    color: var(--text-dark) !important;
     box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
 }
 
-/* 2. Loader custom modifications */
+/* 2. Loader Styling */
 #loader {
-    color: #94a3b8 !important;
+    color: var(--text-secondary) !important;
 }
 
 #loader .spinner-border {
-    color: #3b82f6 !important; /* Electric Blue Spinner */
+    color: var(--accent-blue) !important;
 }
 
 /* 3. Quiz Card Box */
 .quiz-card {
-    background-color: #131a2c !important; /* Premium Dark Navy Card */
+    background-color: var(--bg-card) !important;
     border: 1px solid rgba(77, 173, 255, 0.08) !important;
     border-radius: 24px !important;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
@@ -69,9 +89,9 @@ body {
 
 /* Question Container */
 .question {
-    background-color: #1b253f !important;
-    color: #f1f5f9 !important;
-    border: 2px solid #3b82f6 !important; /* Royal Blue Border */
+    background-color: var(--bg-box) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--accent-blue) !important;
     border-radius: 16px !important;
     padding: 24px 16px !important;
     text-align: center;
@@ -84,8 +104,8 @@ body {
 
 /* 4. Options Interactive Buttons */
 .option-btn {
-    background-color: #1b253f !important;
-    color: #94a3b8 !important; /* Cool Steel Gray Text */
+    background-color: var(--bg-box) !important;
+    color: var(--text-secondary) !important;
     border: 1px solid rgba(148, 163, 184, 0.2) !important;
     border-radius: 14px !important;
     padding: 16px 20px !important;
@@ -96,31 +116,31 @@ body {
 
 /* Hover state logic */
 .option-btn:hover:not(:disabled) {
-    border-color: #4dadff !important;
-    color: #4dadff !important;
+    border-color: var(--accent-glow) !important;
+    color: var(--accent-glow) !important;
     background-color: rgba(77, 173, 255, 0.05) !important;
     transform: translateY(-1px);
 }
 
-/* Disabled state logic (preventing ugly gray out) */
+/* Disabled state logic */
 .option-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* 5. JavaScript Dynamic Answer States (Success & Danger overrides) */
+/* 5. JS Dynamic Answer States (Bootstrap Overrides) */
 .option-btn.btn-success {
-    background-color: #10b981 !important; /* Emerald Green for correct */
-    border-color: #10b981 !important;
+    background-color: var(--state-success) !important;
+    border-color: var(--state-success) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
-    opacity: 1 !important; /* High opacity even when disabled */
+    opacity: 1 !important;
 }
 
 .option-btn.btn-danger {
-    background-color: #ef4444 !important; /* Crimson Red for wrong */
-    border-color: #ef4444 !important;
+    background-color: var(--state-danger) !important;
+    border-color: var(--state-danger) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3) !important;
@@ -129,17 +149,17 @@ body {
 
 /* 6. Quiz Completed Result Box Custom Styling */
 #result-box h3 {
-    color: #f1f5f9 !important;
+    color: var(--text-primary) !important;
 }
 
 #result-box p {
-    color: #94a3b8 !important;
+    color: var(--text-secondary) !important;
 }
 
 /* Customizing Bootstrap's .btn-primary for Result Screen */
 .btn-primary {
-    background-color: #3b82f6 !important;
-    border-color: #3b82f6 !important;
+    background-color: var(--accent-blue) !important;
+    border-color: var(--accent-blue) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3) !important;
@@ -167,3 +187,5 @@ body {
         transform: translateY(0);
     }
 }
+
+
